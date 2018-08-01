@@ -60,6 +60,6 @@ public class ManejoVariablesTest {
         double d1 = 11.0, d2 = 30.15D;
         System.out.println("Valor double1:" + d1);
         System.out.println("Valor double2:" + d2);
-        System.out.println();
+        System.out.println() ;
     }
 }
