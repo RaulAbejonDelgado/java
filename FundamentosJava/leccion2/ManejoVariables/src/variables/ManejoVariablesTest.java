@@ -54,7 +54,7 @@ public class ManejoVariablesTest {
         float f1 = 15, f2 = 22.3F;
         System.out.println("Valor float1:" + f1);
         System.out.println("Valor float2:" + f2);
-        System.out.println();
+        System.out.println() ;
 
         //Variables double
         double d1 = 11.0, d2 = 30.15D;
