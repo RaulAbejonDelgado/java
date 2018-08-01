@@ -3,8 +3,8 @@ package variables;
 public class ManejoCadenasBasico {
 
     public static void main(String[] args) {
-        String nombre="Karla";
-        String apellido="Esparza";
+        String nombre="Nombre";
+        String apellido="Apellido";
         
         System.out.println("Concatenacion:" + nombre + apellido);
         
