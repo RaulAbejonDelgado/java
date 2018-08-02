@@ -6,7 +6,7 @@ public class CicloDoWhile {
         int contador = 0;
         int limite = 10;
         do{
-            System.out.println("contador = " + contador);
+            System.out.println("contador =  " + contador);
             contador++;
         }
         while (contador < limite);

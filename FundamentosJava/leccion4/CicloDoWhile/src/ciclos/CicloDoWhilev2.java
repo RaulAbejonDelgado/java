@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class CicloDoWhilev2 {
     public static void main(String[] args) {
-        System.out.println("Por favor introduce el número de elementos a iterar:");
+        System.out.println("Por favor introduce el número de elementos a iterar: ");
         int maxElementos;
         //Creacion de objeto Scanner para leer datos
         Scanner entradaEscaner = new Scanner(System.in); 
