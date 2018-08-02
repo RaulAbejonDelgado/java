@@ -26,7 +26,7 @@ public class Caja {
     }
     
     public int calcularVolumen(){
-        return alto * ancho * profundo;
+        return alto * ancho * profundo ;
     }
     
     

@@ -15,7 +15,7 @@ public class CajaPrueba {
     
 
      public static void main(String args[]){
-         Caja cajaPrueba = new Caja(5,3,4);
+         Caja cajaPrueba = new Caja(5,3,4) ;
          System.out.println("El volumen de la caja es : " + cajaPrueba.calcularVolumen());
     }
 
