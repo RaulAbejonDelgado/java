@@ -6,7 +6,7 @@ public class EjemploIfElseIfElse {
         //Ejemplo If/Else If/Else
         int x = 10;
         if (x == 10) {
-            System.out.print("X igual a 10\n");
+            System.out.print("X igual a 10\n" );
         } else if (x == 20) {
             System.out.print("X igual a 20\n");
         } else if (x == 30) {
