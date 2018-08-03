@@ -3,7 +3,7 @@ package palabranull;
 public class PalabraNull {
 
     public static void main(String[] args) {
-        Persona p1 = new Persona("Juan");
+        Persona p1 = new Persona("Juan") ;
         System.out.println("Nombre p1:" + p1.obtenerNombre());
 
         Persona p2 = p1; //p2 apunta al mismo objeto que p1
