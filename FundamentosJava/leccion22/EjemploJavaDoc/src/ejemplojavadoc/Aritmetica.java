@@ -28,7 +28,7 @@ public class Aritmetica {
      * @param a Recibe el valor para el operando A
      * @param b Reciboe el valor para el operando B
      */
-    public Aritmetica(int a, int b) {
+    public Aritmetica(int a, int b){
         this.operandoA = a;
         this.operandoB = b;
     }
