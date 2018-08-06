@@ -48,7 +48,7 @@ public class PedidoVentas {
 
     public void mostrarOrden() {
         System.out.println("Orden #:" + idOrden);
-        System.out.println("Total de la orden #"+ idOrden + ": $" + calcularTotal());
+        System.out.println("Total de la orden #"+ idOrden + ": €" + calcularTotal());
         System.out.println("Productos de la orden #" + idOrden + ":");
         for (int i = 0; i < contadorProductos; i++) {
             System.out.println(productos[i]);
