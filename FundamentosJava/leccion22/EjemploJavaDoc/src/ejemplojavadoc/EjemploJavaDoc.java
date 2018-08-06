@@ -10,7 +10,7 @@ package ejemplojavadoc;
  * @author RaulAbejon Delgado
  * @version 1.0
  */
-public class EjemploJavaDoc{
+public class EjemploJavaDoc {
 
     /**
      * Metodo que ejecuta la prueba de la clase Aritmetica
