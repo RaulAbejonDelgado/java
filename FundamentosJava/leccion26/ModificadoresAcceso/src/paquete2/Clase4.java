@@ -1,4 +1,4 @@
-package paquete2;
+package paquete2 ;
 
 import paquete1.Clase1;
 

@@ -1,6 +1,6 @@
-package modificadoresacceso;
+package modificadoresacceso ;
 
-import paquete1.Clase2;
+import paquete1.Clase2 ;
 import paquete2.Clase3;
 import paquete2.Clase4;
 
