@@ -14,6 +14,8 @@ public class ManejoGenericos {
         ClaseGenerica<String> objetoStr = new ClaseGenerica<>("Prueba");
         objetoStr.obtenerTipo();
         
+        // Creamos una instancia de ClaseGenerica para Double.
+        //Se puede utilizar la inferencia del tipo del lado derecho
         ClaseGenerica<Double> objetoDou = new ClaseGenerica<Double>(12.10);
         objetoDou.obtenerTipo();
 
