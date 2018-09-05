@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-sep-2018, 17:17:50
+    Author     : drohne
+*/
+header, nav, section, article, footer {
+    display: block;/*Para que cada elemento se ancle en su espacio*/
+    background-color: aliceblue;
+    padding: 3px; 
+    margin: 5px;
+}
+
+nav{
+	width: 15%;
+	float:left;
+}
+section{
+	width:75%;
+	float:right;
+}
+
+article{
+	background-color:cadetblue;
+}
+footer{
+	/*Al quedarse el footer entre el nav y article con clear:both se corrige el fallo*/
+	clear:both; /*Al tener un float en elementos superiores, limpiamos cualquier elemento float que se haya podido mantener en el footer*/
+	text-align: center;
+}
+
+
