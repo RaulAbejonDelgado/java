@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class UsuariosJDBC {
     private final String SQL_INSERT = "INSERT INTO usuarios(nombre,email,password) VALUES(?,?,?)";
-    private final String SQL_UPDATE ="UPDATE usuarios SET nombre=?,email=?,password=? WHERE id_usuarios=?";
+    private final String SQL_UPDATE ="UPDATE usuarios SET nombre=?,email=?,password=? WHERE id_usuarios=? VALUES(?,?,?,?)";
     private final String SQL_SELECT ="SELECT * FROM usuarios ORDER BY id_usuarios";
     private final String SQL_DELETE ="DELETE from usuarios WHERE id_usuarios=?";
     
@@ -32,7 +32,7 @@ public class UsuariosJDBC {
             int index = 1;
             estamento.setString(index++, nombre);//parametro 1
             estamento.setString(index++, email);//parametro 2
-            estamento.setString(index, pass);//parametro 2
+            estamento.setString(index, pass);//parametro 3
             System.out.println("INSERTANDO ");
             //nos devuelve un entero representado el numero de registros afectados por la query
             rows = estamento.executeUpdate();
@@ -63,9 +63,10 @@ public class UsuariosJDBC {
             int index = 1;
             
             
-            estamento.setString(index++, nombre);//parametro 2
-            estamento.setString(index++, email);//parametro 3
-            estamento.setString(index++, pass);
+            estamento.setString(index++, nombre);//parametro 1
+            estamento.setString(index++, email);//parametro 2
+            estamento.setString(index++, pass);//parametro 3
+            estamento.setInt(index++, idPersona);//parametro 4
             
             System.out.println("ACTUALIZANDO");
             rows = estamento.executeUpdate();

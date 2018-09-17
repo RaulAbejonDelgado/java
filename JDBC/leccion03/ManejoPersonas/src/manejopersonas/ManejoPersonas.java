@@ -182,7 +182,36 @@ public class ManejoPersonas {
     }
     
      private void modificarUsuarios() {
-         System.out.println("modificarUSuarios");
+        System.out.println("modificarUSuarios");
+        BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
+        int idUsuario;
+        char actualizarCampo;
+        String nombre;
+        String email;
+        String pass;
+        ArrayList<Usuario> usuariosLista = new ArrayList<Usuario>();
+         try {
+            System.out.println("Introduce el id que quieres actualizar");
+            idUsuario = Integer.parseInt(bufer.readLine());
+            usuariosLista = usuariosJDBC.seleccionar();
+            Usuario usuarioActualizar = null;
+            for(Usuario u : usuariosLista){
+                if(idUsuario == u.getId()){
+                   usuarioActualizar = u;
+                }
+            }
+            System.out.println("Introduzca el nuevo nombre");
+            nombre = bufer.readLine();
+            System.out.println("Introduzca el nuevo emal");
+            email = bufer.readLine();
+            System.out.println("Introduzca la nueva contraseña");
+            pass = bufer.readLine(); 
+            usuariosJDBC.actualizar(idUsuario, nombre, email, pass);
+         } catch (Exception e) {
+             e.printStackTrace();
+             System.out.println("Error en modificarUsuario");
+             modificarUsuarios();
+         }
     }
     
     public void opcionSelecionadaAlumno(int opcion){
