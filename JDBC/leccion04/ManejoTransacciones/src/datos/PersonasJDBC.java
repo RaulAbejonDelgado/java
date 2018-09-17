@@ -13,9 +13,20 @@ public class PersonasJDBC {
     private final String SQL_SELECT ="SELECT * FROM personas ORDER BY id_persona";
     private final String SQL_DELETE ="DELETE from personas WHERE id_persona=?";
     
+    //leccion 4
+    private java.sql.Connection userConn;
+    //leccuib 4
+    public PersonasJDBC(Connection conn){
+        this.userConn = conn;
+    }
+
+    public PersonasJDBC() {
+       
+    }
+    
     //funcion INSERT
     
-    public int insertar(String nombre, String apellido){
+    public int insertar(String nombre, String apellido) throws SQLException{
         //Creamos los objetos de conexion, statement para ejecutar las querys
         //y resulset para el retorno
         Connection conexion = null;
@@ -25,7 +36,7 @@ public class PersonasJDBC {
         //donde guardaremos el numero de registros afectados
         int rows = 0 ;
         try {
-            conexion = Conexion.getConnection();
+            conexion = (this.userConn != null) ? this.userConn : Conexion.getConnection();
             estamento = conexion.prepareStatement(SQL_INSERT);
             //resultado = estamento.executeQuery(estamento);
             //Con esto nos apoyaremos para sustituir los ? de la query por los parametros en ejecucion
@@ -36,15 +47,17 @@ public class PersonasJDBC {
             //nos devuelve un entero representado el numero de registros afectados por la query
             rows = estamento.executeUpdate();
             System.out.println("Registros afectados: " + rows);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }finally{
-            Conexion.close(conexion);
+            //leccion 4
+            //Para mantener activa la conexion
+            if (this.userConn == null){
+                Conexion.close(conexion);
+            }
         }
         return rows;
     }
     
-    public int actualizar(int idPersona, String nombre, String apellido){
+    public int actualizar(int idPersona, String nombre, String apellido) throws SQLException{
         //Creamos los objetos de conexion, statement para ejecutar las querys
         //y resulset para el retorno
         Connection conexion = null;
@@ -55,7 +68,7 @@ public class PersonasJDBC {
         int rows = 0;
         if(idPersona > 0){
             try {
-            conexion = Conexion.getConnection();
+            conexion = (this.userConn != null) ? this.userConn : Conexion.getConnection();
             estamento = conexion.prepareStatement(SQL_UPDATE);
             //resultado = estamento.executeQuery(estamento);
             //Con esto nos apoyaremos para sustituir los ? de la query por los parametros en ejecucion
@@ -67,17 +80,18 @@ public class PersonasJDBC {
             System.out.println("ACTUALIZANDO");
             rows = estamento.executeUpdate();
                 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally{
-                Conexion.close(conexion);
+            } finally{
+                //Para mantener viva la conexion a la bd
+                if(this.userConn == null) {
+                    this.userConn = Conexion.getConnection();
+                }
             }
         }
         
         return rows;
     }
     
-    public ArrayList<Persona> seleccionar(){
+    public ArrayList<Persona> seleccionar() throws SQLException{
         //Creamos los objetos de conexion, statement para ejecutar las querys
         //y resulset para el retorno
         Connection conexion = null;
@@ -88,7 +102,7 @@ public class PersonasJDBC {
         ArrayList<Persona> personasArray = new ArrayList<>();
         int rows = 0;
             try {
-            conexion = Conexion.getConnection();
+            conexion = (this.userConn != null) ? this.userConn : Conexion.getConnection();
             estamento = conexion.prepareStatement(SQL_SELECT);
             resultado = estamento.executeQuery();
             //resultado = estamento.executeQuery(estamento);
@@ -101,17 +115,18 @@ public class PersonasJDBC {
             }
             
                 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally{
+            } finally{
                 Conexion.close(resultado);
-                Conexion.close(conexion);
+                if(userConn == null){
+                    userConn= Conexion.getConnection();
+                }
+                
             }
         return personasArray;
     
     }
     
-    public int borrar(int idPersona){
+    public int borrar(int idPersona) throws SQLException{
         //Creamos los objetos de conexion, statement para ejecutar las querys
         //y resulset para el retorno
         Connection conexion = null;
@@ -122,7 +137,7 @@ public class PersonasJDBC {
         int rows = 0;
         if(idPersona > 0){
             try {
-            conexion = Conexion.getConnection();
+            conexion = (this.userConn != null) ? this.userConn : Conexion.getConnection();
             estamento = conexion.prepareStatement(SQL_DELETE);
             //resultado = estamento.executeQuery(estamento);
             //Con esto nos apoyaremos para sustituir los ? de la query por los parametros en ejecucion
@@ -131,10 +146,11 @@ public class PersonasJDBC {
             System.out.println("Eliminando");
             rows = estamento.executeUpdate();
                 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally{
-                Conexion.close(conexion);
+            } finally{
+                
+                if(userConn == null){
+                    userConn = Conexion.getConnection();
+                }
             }
         }
         
