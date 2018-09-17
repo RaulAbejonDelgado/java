@@ -118,6 +118,7 @@ public class ManejoPersonas {
     
     
     private void opcionSelecionadaUsuario(int opcion) {
+        System.out.println(opcion);
         switch(opcion){
             case 1:
                 listarUsuarios();

@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class UsuariosJDBC {
     private final String SQL_INSERT = "INSERT INTO usuarios(nombre,email,password) VALUES(?,?,?)";
-    private final String SQL_UPDATE ="UPDATE usuarios SET nombre=?,email=?,password=? WHERE id_usuarios=? VALUES(?,?,?,?)";
+    private final String SQL_UPDATE ="UPDATE usuarios SET nombre=?,email=?,password=? WHERE id_usuarios=? ";
     private final String SQL_SELECT ="SELECT * FROM usuarios ORDER BY id_usuarios";
     private final String SQL_DELETE ="DELETE from usuarios WHERE id_usuarios=?";
     
