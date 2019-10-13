@@ -6,7 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="partners")
@@ -37,10 +39,11 @@ public class Partner implements Serializable {
 
     private String photo;
 
-
+    @OneToMany(mappedBy = "partner",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SaleOrder> saleOrders;
 
     public Partner() {
-        super();
+        saleOrders = new ArrayList<>();
     }
 
     public Partner(Long id, String name, String surname, String email, Date createAt, String photo) {
@@ -55,6 +58,18 @@ public class Partner implements Serializable {
     @PrePersist
     public void prePersist() {
         this.createAt = new Date();
+    }
+
+    public List<SaleOrder> getSaleOrders() {
+        return saleOrders;
+    }
+
+    public void setSaleOrders(List<SaleOrder> saleOrders) {
+        this.saleOrders = saleOrders;
+    }
+
+    public void addSaleOrder(SaleOrder so){
+        this.saleOrders.add(so);
     }
 
     public String getPhoto() {

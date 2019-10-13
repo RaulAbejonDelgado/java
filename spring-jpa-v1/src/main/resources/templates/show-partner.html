@@ -25,6 +25,29 @@
                 <li class="list-group-item" th:text="${partner.createAt}"></li>
 
             </ul>
+            <div th:if="${#lists.isEmpty(partner.saleOrders)}" class="alert alert-info my-4" th:text="'With out sale orders assigned'"></div>
+            <table th:if="${not #lists.isEmpty(partner.saleOrders)}" class="table table-bordered table-striped my-4">
+                <thead>
+                <tr>
+                    <td>Saler order</td>
+                    <td>Description</td>
+                    <td>Date</td>
+                    <td>Total</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="saleOrder: ${partner.saleOrders}">
+                        <td th:text="${saleOrder.id}">Saler order</td>
+                        <td th:text="${saleOrder.description}">Description</td>
+                        <td th:text="${saleOrder.createAt}"> Date</td>
+                        <td th:text="${saleOrder.total}">Total</td>
+                        <!--<tr th:each="line: ${saleOrder.lines}">-->
+                            <!--<th th:text="${line.quantiy}"></th>-->
+                        <!--</tr>-->
+                    </tr>
+                </tbody>
+
+            </table>
         </div>
     </div>
 
