@@ -175,7 +175,7 @@ public class PartnerController {
 
     }
 
-    @RequestMapping(value = "/eliminar/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
         Partner partner;
         if (id > 0) {

@@ -1,6 +1,7 @@
 package com.raul.spring.jpa.springjpav1.models.service;
 
 import com.raul.spring.jpa.springjpav1.models.entity.Partner;
+import com.raul.spring.jpa.springjpav1.models.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,4 +17,6 @@ public interface IPartnerRepoService {
     public Partner findOne(Long id) throws Exception;
 
     public void delete(Long id);
+
+    public List<Product> findByProductName(String term);
 }

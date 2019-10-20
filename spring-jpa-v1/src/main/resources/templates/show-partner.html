@@ -12,7 +12,9 @@
             </h1>
         </div>
         <div class="card-body">
-
+            <div class="card-title" >
+                <a class="btn btn-secondary btn-xs" th:href="@{/saleorder/sale-order/} + ${partner.id}" th:text="'Crear factura'"></a>
+            </div>
             <img th:if="${#strings.length(partner.photo) > 0}" class="img-thumbnail rounded float-left"
                  style="max-width: 25%;"
                  th:src="@{'/uploads/' + ${partner.photo}}"

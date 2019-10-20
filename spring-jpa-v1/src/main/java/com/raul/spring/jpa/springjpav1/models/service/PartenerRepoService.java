@@ -1,7 +1,9 @@
 package com.raul.spring.jpa.springjpav1.models.service;
 
 import com.raul.spring.jpa.springjpav1.models.dao.IPartnerRepository;
+import com.raul.spring.jpa.springjpav1.models.dao.IProductDao;
 import com.raul.spring.jpa.springjpav1.models.entity.Partner;
+import com.raul.spring.jpa.springjpav1.models.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,9 @@ import java.util.List;
 public class PartenerRepoService implements IPartnerRepoService{
     @Autowired
     private IPartnerRepository partnerDao;
+
+    @Autowired
+    private IProductDao productDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -42,5 +47,10 @@ public class PartenerRepoService implements IPartnerRepoService{
     @Override
     public void delete(Long id) {
         partnerDao.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findByProductName(String term) {
+        return productDao.findByName(term);
     }
 }
