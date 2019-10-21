@@ -38,9 +38,9 @@ INSERT INTO partners( name, surname, email, create_at, photo) VALUES('Enhord','E
 
 /*Products*/
 
-INSERT INTO products (name, price, create_at) VALUES('Keyboard',10,NOW());
-INSERT INTO products (name, price, create_at) VALUES('Mouse',7,NOW());
-INSERT INTO products (name, price, create_at) VALUES('Monitor',65,NOW());
+INSERT INTO products (name, price, create_at) VALUES('Keyboard',10.00,NOW());
+INSERT INTO products (name, price, create_at) VALUES('Mouse',7.00,NOW());
+INSERT INTO products (name, price, create_at) VALUES('Monitor',65.00,NOW());
 
 /*SaleOrders*/
 INSERT INTO sales_order(description, obserbation,partner_id, create_at) VALUES('Office material',null,1, NOW());
