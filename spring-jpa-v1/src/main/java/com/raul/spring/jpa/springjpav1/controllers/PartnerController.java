@@ -61,7 +61,8 @@ public class PartnerController {
     public String show(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
         Partner partner = null;
         try {
-            partner = partnerRepoService.findOne(id);
+            //partner = partnerRepoService.findOne(id);
+            partner = partnerRepoService.fetchByIdWithSaleOrders(id);
         } catch (Exception e) {
             e.printStackTrace();
             flash.addFlashAttribute("error", e.getMessage());

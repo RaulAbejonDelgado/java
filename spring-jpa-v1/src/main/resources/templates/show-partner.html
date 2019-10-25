@@ -35,6 +35,8 @@
                     <td>Description</td>
                     <td>Date</td>
                     <td>Total</td>
+                    <td>Ver</td>
+                    <td>Borrar</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +45,8 @@
                         <td th:text="${saleOrder.description}">Description</td>
                         <td th:text="${saleOrder.createAt}"> Date</td>
                         <td th:text="${saleOrder.total}">Total</td>
+                        <td><a class="btn btn-xs btn-primary" th:href="@{/saleorder/show/} + ${saleOrder.id}" th:text="'Detalle'"></a></td>
+                        <td><a class="btn btn-xs btn-danger" th:href="@{/saleorder/delete/} + ${saleOrder.id}" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')"></a></td>
                         <!--<tr th:each="line: ${saleOrder.lines}">-->
                             <!--<th th:text="${line.quantiy}"></th>-->
                         <!--</tr>-->

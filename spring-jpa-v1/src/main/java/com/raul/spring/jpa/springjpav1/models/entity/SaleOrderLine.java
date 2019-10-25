@@ -43,7 +43,7 @@ public class SaleOrderLine  implements Serializable {
         this.quantiy = quantiy;
     }
 
-    public Double ComputeTotal(){
+    public Double computeTotal(){
         return quantiy.doubleValue() * product.getPrice();
     }
 }

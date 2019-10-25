@@ -3,6 +3,7 @@ package com.raul.spring.jpa.springjpav1.models.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class SaleOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String description;
     private String obserbation;
 
@@ -96,7 +98,7 @@ public class SaleOrder implements Serializable {
     public Double getTotal(){
         Double total = 0.0;
         for(SaleOrderLine sol : lines){
-            total += sol.ComputeTotal();
+            total += sol.computeTotal();
         }
         return total;
     }

@@ -123,4 +123,17 @@ public class Partner implements Serializable {
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
+
+    @Override
+    public String toString() {
+        return "Partner{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", createAt=" + createAt +
+                ", photo='" + photo + '\'' +
+                ", saleOrders=" + saleOrders +
+                '}';
+    }
 }

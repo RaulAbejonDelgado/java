@@ -48,6 +48,11 @@ public class PartenerRepoService implements IPartnerRepoService{
         return partnerDao.findById(id).orElseGet(null);
     }
 
+    @Override
+    public Partner fetchByIdWithSaleOrders(Long id) {
+        return partnerDao.fetchByIdWithSaleOrders(id);
+    }
+
     @Transactional
     @Override
     public void delete(Long id) {
@@ -70,4 +75,30 @@ public class PartenerRepoService implements IPartnerRepoService{
     public Product findProductById(Long id) {
         return productDao.findById(id).orElse(null);
     }
+
+
+    @Transactional(readOnly = true)
+    @Override
+    public SaleOrder findSaleOrderByPartnerId(Long id) {
+        return saleOrderDao.findById(id).orElse(null);
+
+    }
+
+    /**
+     *
+     * @param id SaleOrder Id
+     */
+    @Transactional
+    @Override
+    public void deletePartnerSaleOrderById(Long id){
+        saleOrderDao.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SaleOrder fetchByIdWithPartnerWithSoLineWithProduct(Long id) {
+        return saleOrderDao.fetchByIdWithPartnerWithSoLineWithProduct(id);
+    }
+
+
 }
