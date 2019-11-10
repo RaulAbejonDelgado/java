@@ -9,4 +9,8 @@ public interface ItemsService {
 
     public List<Item> listAll();
     public Item findById(Long id, int quantity);
+
+    public Product save(Product product);
+    public Product update(Long id ,Product product);
+    public void delete(Long id);
 }

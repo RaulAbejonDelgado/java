@@ -9,17 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RefreshScope //permit us refresh update the components, the enviroment, the context without restart the server
 @RestController
 public class ItemController {
 
@@ -82,6 +82,24 @@ public class ItemController {
         return new ResponseEntity<Map<String,String>>(json, HttpStatus.OK);
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product create(@RequestBody Product product){
+        return itemsService.save(product);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product update(@PathVariable Long id, @RequestBody Product product){
 
 
+        return  itemsService.update(id,product);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        itemsService.delete(id);
+
+    }
 }
