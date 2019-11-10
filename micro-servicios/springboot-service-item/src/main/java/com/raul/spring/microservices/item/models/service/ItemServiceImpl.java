@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemsService {
     public Item findById(Long id, int quantity) {
         Map<String, String> pathVariables = new HashMap<String, String>();
         pathVariables.put("id",id.toString());
-        Product product = itemRest.getForObject("http://service-product/detail/{id}", Product.class, pathVariables);
+        Product product = itemRest.getForObject("http://service-products/detail/{id}", Product.class, pathVariables);
         return new Item(product,quantity);
     }
 }
