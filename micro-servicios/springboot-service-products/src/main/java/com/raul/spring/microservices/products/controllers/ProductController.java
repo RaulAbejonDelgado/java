@@ -5,9 +5,8 @@ import com.raul.spring.microservices.products.models.service.IproductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,5 +39,30 @@ public class ProductController {
         product.setPort(port);
 
         return product;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product save(@RequestBody Product product){
+        return productService.save(product);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product update(@PathVariable(value = "id") Long id,
+                          @RequestBody Product product){
+        Product p = productService.findById(id);
+        p.setName(product.getName());
+        p.setPrice(product.getPrice());
+
+        return p;
+
+    }
+
+    @DeleteMapping("{/id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id ){
+        productService.deleteById(id);
+
     }
 }
