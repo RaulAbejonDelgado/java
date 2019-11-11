@@ -1,7 +1,9 @@
 package com.raul.spring.microservices.products.models.service;
 
+import com.raul.spring.microservices.commons.models.entity.Product;
 import com.raul.spring.microservices.products.models.dao.ProductDao;
-import com.raul.spring.microservices.products.models.entity.Product;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

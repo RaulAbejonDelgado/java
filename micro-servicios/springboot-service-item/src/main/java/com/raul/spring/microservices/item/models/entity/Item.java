@@ -1,4 +1,5 @@
 package com.raul.spring.microservices.item.models.entity;
+import com.raul.spring.microservices.commons.models.entity.Product;
 
 public class Item {
 

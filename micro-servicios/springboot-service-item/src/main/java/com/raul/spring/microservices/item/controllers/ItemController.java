@@ -2,8 +2,9 @@ package com.raul.spring.microservices.item.controllers;
 
 import com.netflix.discovery.converters.Auto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.raul.spring.microservices.commons.models.entity.Product;
 import com.raul.spring.microservices.item.models.entity.Item;
-import com.raul.spring.microservices.item.models.entity.Product;
+
 import com.raul.spring.microservices.item.models.service.ItemsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

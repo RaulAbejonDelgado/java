@@ -1,12 +1,16 @@
-package com.raul.spring.microservices.item.models.entity;
+package com.raul.spring.microservices.commons.models.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "products")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -16,6 +20,7 @@ public class Product implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @Transient
     private int port;
 
     public int getPort() {

@@ -1,6 +1,7 @@
 package com.raul.spring.microservices.products.controllers;
 
-import com.raul.spring.microservices.products.models.entity.Product;
+
+import com.raul.spring.microservices.commons.models.entity.Product;
 import com.raul.spring.microservices.products.models.service.IproductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

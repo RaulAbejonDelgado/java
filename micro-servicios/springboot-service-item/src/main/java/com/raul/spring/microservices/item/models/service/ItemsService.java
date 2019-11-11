@@ -1,7 +1,8 @@
 package com.raul.spring.microservices.item.models.service;
 
+import com.raul.spring.microservices.commons.models.entity.Product;
 import com.raul.spring.microservices.item.models.entity.Item;
-import com.raul.spring.microservices.item.models.entity.Product;
+
 
 import java.util.List;
 
