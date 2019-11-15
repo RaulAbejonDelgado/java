@@ -1,4 +1,4 @@
-package com.raul.spring.microservices.user.models.entity;
+package com.raul.spring.microservices.user.commons.models.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
