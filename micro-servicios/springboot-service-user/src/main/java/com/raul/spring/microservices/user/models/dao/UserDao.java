@@ -1,6 +1,6 @@
 package com.raul.spring.microservices.user.models.dao;
 
-import com.raul.spring.microservices.user.models.entity.User;
+import com.raul.spring.microservices.user.commons.models.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
