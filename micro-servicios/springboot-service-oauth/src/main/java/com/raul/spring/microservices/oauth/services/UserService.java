@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements IUserService ,UserDetailsService {
 
     private Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -46,5 +46,10 @@ public class UserService implements UserDetailsService {
                 true,
                 true,
                 authorities);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return feingClient.findByUsername(username);
     }
 }
