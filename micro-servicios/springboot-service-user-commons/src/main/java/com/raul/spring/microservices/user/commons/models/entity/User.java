@@ -29,6 +29,15 @@ public class User implements Serializable {
     @Column(unique = true, length = 100)
     private String email;
 
+    private int loggingTries;
+
+    public int getLoggingTries() {
+        return loggingTries;
+    }
+
+    public void setLoggingTries(int loggingTries) {
+        this.loggingTries = loggingTries;
+    }
 
     public List<Role> getRoles() {
         return roles;
