@@ -2,6 +2,7 @@ package com.raul.spring.microservices.oauth.security.event;
 
 import com.raul.spring.microservices.oauth.services.IUserService;
 import com.raul.spring.microservices.user.commons.models.entity.User;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,17 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 
     @Override
     public void publishAuthenticationFailure(AuthenticationException e, Authentication authentication) {
-        User u = userService.findByUsername(authentication.getName());
-        u.setLoggingTries(u.getLoggingTries()+1);
-        if(u.getLoggingTries() >= 3) {
-            u.setEnabled(false);
+        try{
+            User u = userService.findByUsername(authentication.getName());
+            u.setLoggingTries(u.getLoggingTries()+1);
+            if(u.getLoggingTries() >= 3) {
+                u.setEnabled(false);
+            }
+            userService.update(u,u.getId());
+            log.error(String.format("Error publishAuthenticationFailure : %s, the user %s, are tried %d times logging", e.getMessage(),u.getUsername(),u.getLoggingTries()));
+        }catch (FeignException ex){
+            ex.printStackTrace();
         }
-        userService.update(u,u.getId());
-        log.error(String.format("Error publishAuthenticationFailure : %s, the user %s, are tried %d times logging", e.getMessage(),u.getUsername(),u.getLoggingTries()));
+
     }
 }

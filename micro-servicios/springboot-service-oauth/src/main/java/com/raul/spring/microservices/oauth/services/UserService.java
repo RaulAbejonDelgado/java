@@ -2,6 +2,7 @@ package com.raul.spring.microservices.oauth.services;
 
 import com.raul.spring.microservices.oauth.clients.UserFeingClient;
 import com.raul.spring.microservices.user.commons.models.entity.User;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,10 @@ public class UserService implements IUserService ,UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = null;
+        try{
+            user = feingClient.findByUsername(username);
 
-        User user = feingClient.findByUsername(username);
-
-        if(user == null){
-            log.error(String.format("Error in the login, the user %s not exists",username));
-            throw new UsernameNotFoundException("User not exists.");
-        }
 
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -46,6 +44,10 @@ public class UserService implements IUserService ,UserDetailsService {
                 true,
                 true,
                 authorities);
+        }catch (FeignException e){
+            log.error(String.format("Error in the login, the user %s not exists",username));
+            throw new UsernameNotFoundException("User not exists.");
+        }
     }
 
     @Override
