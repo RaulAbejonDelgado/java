@@ -38,7 +38,7 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
             userService.update(u,u.getId());
             log.error(String.format("Error publishAuthenticationFailure : %s, the user %s, are tried %d times logging", e.getMessage(),u.getUsername(),u.getLoggingTries()));
         }catch (FeignException ex){
-            ex.printStackTrace();
+            log.error(ex.getMessage());
         }
 
     }
