@@ -15,7 +15,7 @@ public class User implements Serializable {
     @Column(unique = true, length = 20)
     private String username;
 
-    @Column(unique = true, length = 60)
+    @Column(unique = false, length = 60)
     private String password;
     private Boolean enabled;
     private String name;
@@ -29,6 +29,7 @@ public class User implements Serializable {
     @Column(unique = true, length = 100)
     private String email;
 
+    @Column(name="logging_tries")
     private int loggingTries;
 
     public int getLoggingTries() {
