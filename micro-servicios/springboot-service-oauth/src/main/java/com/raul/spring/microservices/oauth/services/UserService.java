@@ -52,4 +52,9 @@ public class UserService implements IUserService ,UserDetailsService {
     public User findByUsername(String username) {
         return feingClient.findByUsername(username);
     }
+
+    @Override
+    public User update(User user, Long id) {
+        return feingClient.update(user,id);
+    }
 }
