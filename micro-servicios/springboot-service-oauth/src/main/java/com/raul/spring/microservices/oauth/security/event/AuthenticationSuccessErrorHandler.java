@@ -1,5 +1,6 @@
 package com.raul.spring.microservices.oauth.security.event;
 
+import brave.Tracer;
 import com.raul.spring.microservices.oauth.services.IUserService;
 import com.raul.spring.microservices.user.commons.models.entity.User;
 import feign.FeignException;
@@ -19,6 +20,9 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private Tracer tracer;
+
     @Override
     public void publishAuthenticationSuccess(Authentication authentication) {
         User u = userService.findByUsername(authentication.getName());
@@ -29,6 +33,8 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 
     @Override
     public void publishAuthenticationFailure(AuthenticationException e, Authentication authentication) {
+        StringBuilder errors = new StringBuilder();
+
         try{
             User u = userService.findByUsername(authentication.getName());
             u.setLoggingTries(u.getLoggingTries()+1);
@@ -37,9 +43,14 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
             }
             userService.update(u,u.getId());
             log.error(String.format("Error publishAuthenticationFailure : %s, the user %s, are tried %d times logging", e.getMessage(),u.getUsername(),u.getLoggingTries()));
+            errors.append(String.format("Error publishAuthenticationFailure : %s, the user %s, are tried %d times logging", e.getMessage(),u.getUsername(),u.getLoggingTries()));
+            tracer.currentSpan().tag(" Errors:", errors.toString());
         }catch (FeignException ex){
             log.error(ex.getMessage());
+            errors.append(String.format("Catching error: %s",ex.getMessage()));
+            tracer.currentSpan().tag("Errors:" , errors.toString());
         }
 
     }
 }
+

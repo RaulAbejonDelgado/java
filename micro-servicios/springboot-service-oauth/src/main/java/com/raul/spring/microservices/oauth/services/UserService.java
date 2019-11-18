@@ -1,5 +1,6 @@
 package com.raul.spring.microservices.oauth.services;
 
+import brave.Tracer;
 import com.raul.spring.microservices.oauth.clients.UserFeingClient;
 import com.raul.spring.microservices.user.commons.models.entity.User;
 import feign.FeignException;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService ,UserDetailsService {
 
     private Logger log = LoggerFactory.getLogger(UserService.class);
+
+    @Autowired
+    private Tracer tracer;
 
     @Autowired
     private UserFeingClient feingClient;
@@ -45,7 +49,8 @@ public class UserService implements IUserService ,UserDetailsService {
                 true,
                 authorities);
         }catch (FeignException e){
-            log.error(String.format("Error in the login, the user %s not exists",username));
+            String errormsg = String.format("Error in the login, the user %s not exists",username);
+            tracer.currentSpan().tag("Error msg :", errormsg + " : "+ e.getMessage());
             throw new UsernameNotFoundException("User not exists.");
         }
     }
