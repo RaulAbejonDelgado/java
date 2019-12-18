@@ -39,7 +39,7 @@ services:
       - springcloud
     environment:
       MYSQL_DATABASE: db_springboot_cloud
-      MYSQL_ROOT_PASSWORD: adminadmin
+      MYSQL_ROOT_PASSWORD: 
 
   microservice-postgres95:
     image: postgres:9.5-alpine
@@ -50,8 +50,8 @@ services:
       - springcloud
     environment: 
       POSTGRES_DB: db_springboot_cloud
-      POSTGRES_USER: rul
-      POSTGRES_PASSWORD: hiphop35
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
 
   service-product:
     image: service-product:v1
