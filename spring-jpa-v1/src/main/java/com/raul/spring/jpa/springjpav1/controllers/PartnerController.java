@@ -31,8 +31,6 @@ public class PartnerController {
 
     private String TITLE = "Partner form";
 
-//    @Autowired
-//    private IPartnerService partnerService;
 
     @Autowired
     private IPartnerRepoService partnerRepoService;
@@ -78,7 +76,7 @@ public class PartnerController {
         return "show-partner";
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = {"/list", "/",""}, method = RequestMethod.GET)
     public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Pageable pageRequest = PageRequest.of(page, 6);
 
