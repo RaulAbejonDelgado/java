@@ -13,6 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,15 +26,19 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
 public class PartnerController {
 
     private String TITLE = "Partner form";
+    private boolean flag = false;
 
 
     @Autowired
@@ -87,6 +96,8 @@ public class PartnerController {
         model.addAttribute("Title", "List of partners");
         model.addAttribute("partners", partners);
         model.addAttribute("page", pageRender);
+
+
 
         return "index";
     }
@@ -197,6 +208,59 @@ public class PartnerController {
         }
 
         return "redirect:../list";
+    }
+
+
+    /*-----------------------------------checkRole-------------------------------------------------*/
+    /**
+     * To verify if the user is part of some rol, and check
+     */
+    public boolean hasRoleNative(HttpServletRequest request){
+        return request.isUserInRole("ROLE_ADMIN");
+    }
+
+
+    /**
+     * To verify if the user is part of some rol, and check
+     */
+    public boolean hasRole(HttpServletRequest request){
+        flag = false;
+        SecurityContextHolderAwareRequestWrapper securityContext =
+                new SecurityContextHolderAwareRequestWrapper(request, "ROLE_");
+        if(securityContext.isUserInRole("ADMIN")){
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    /**
+     * To verify if the user is part of some rol, and check
+     */
+    private boolean hasRole(String role) {
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null ){
+            flag = false;
+        }
+        Authentication auth = context.getAuthentication();
+
+        if (auth == null ){
+            flag = false;
+        }
+
+        /**
+         * all class Role have to implements this interface
+         */
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+
+        authorities.forEach( rol ->{
+            if(role.equals(rol.getAuthority())){
+                flag = true;
+            }
+        });
+
+        return flag;
     }
 
 }

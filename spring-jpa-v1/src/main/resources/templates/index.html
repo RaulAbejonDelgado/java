@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 <header th:replace="layout/layout :: header"></header>
@@ -14,17 +14,17 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">
-                <a th:href="@{/partner-form}" class="btn btn-success btn-xs">Create Partner</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/partner-form}" class="btn btn-success btn-xs">Create Partner</a>
             </h4>
             <table class="table table-striped">
                 <thead class="text-light bg-dark">
                 <tr>
-                    <td>Id</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">Id</td>
                     <td>Nombre</td>
                     <td>Apellido</td>
                     <td>Email</td>
                     <td>Fecha</td>
-                    <td>Crear factura</td>
+                    <td sec:authorize="isAuthenticated()">Crear factura</td>
                     <td>Editar</td>
                     <td>Eliminar</td>
                 </tr>
@@ -32,18 +32,18 @@
                 <tbody>
                 <tr th:each="partner: ${partners}">
                     <td>
-                        <a class="btn btn-primary btn-xs" th:href="@{/show/} + ${partner.id}" th:text="${partner.id}"></a>
+                        <a sec:authorize="isAuthenticated()" class="btn btn-primary btn-xs" th:href="@{/show/} + ${partner.id}" th:text="${partner.id}"></a>
                     </td>
-                    <td th:text="${partner.name}"></td>
-                    <td th:text="${partner.surname}"></td>
-                    <td th:text="${partner.email}"></td>
-                    <td th:text="${partner.createAt}"></td>
-                    <td><a class="btn btn-secondary btn-xs" th:href="@{/saleorder/sale-order/} + ${partner.id}" th:text="'Crear factura'"></a>
+                    <td sec:authorize="isAuthenticated()" th:text="${partner.name}"></td>
+                    <td sec:authorize="isAuthenticated()" th:text="${partner.surname}"></td>
+                    <td sec:authorize="isAuthenticated()" th:text="${partner.email}"></td>
+                    <td sec:authorize="isAuthenticated()" th:text="${partner.createAt}"></td>
+                    <td><a sec:authorize="isAuthenticated()" class="btn btn-secondary btn-xs" th:href="@{/saleorder/sale-order/} + ${partner.id}" th:text="'Crear factura'"></a>
                     </td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/partner-form/} + ${partner.id}"
+                    <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-xs" th:href="@{/partner-form/} + ${partner.id}"
                            th:text="editar"></a>
                     </td>
-                    <td><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${partner.id}" th:text="Eliminar"
+                    <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-xs" th:href="@{/delete/} + ${partner.id}" th:text="Eliminar"
                            onclick="return confirm('¿ Esta seguro de eliminar el registro ?')"></a></td>
                 </tr>
                 </tbody>
