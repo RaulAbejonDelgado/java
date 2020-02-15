@@ -1,6 +1,7 @@
 package com.raul.spring.jpa.springjpav1;
 
 import com.raul.spring.jpa.springjpav1.auth.handler.LoginSuccessHandler;
+import com.raul.spring.jpa.springjpav1.models.service.UserDetailsJpaServcie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +21,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoginSuccessHandler successHandler;
 
-    @Autowired
-    private DataSource dataSource;
+    /**
+     * Jdbc authentication
+     */
+//    @Autowired
+//    private DataSource dataSource;
+//    private String USER_QUERY = "select username, password, enabled from users where username=?";
+//    private String USER_ROLE = "select u.username, a.authority from authorities a inner join users u on (a.user_id=u.id) where u.username=?";
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    private String USER_QUERY = "select username, password, enabled from users where username=?";
-    private String USER_ROLE = "select u.username, a.authority from authorities a inner join users u on (a.user_id=u.id) where u.username=?";
+    /**
+     * JPA authentication
+     */
+    @Autowired
+    private UserDetailsJpaServcie userDetailsJpaServcie;
+
+
 
 
 
@@ -56,7 +67,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //        PasswordEncoder encoder = passwordEncoder();
 //
-//        UserBuilder users = User.builder().passwordEncoder(password -> {
+//        UserBuilder users = UserEntity.builder().passwordEncoder(password -> {
 //            return encoder.encode(password);
 //        });
 //
@@ -71,13 +82,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Jdbc authentication
      */
+//    @Autowired
+//    public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception
+//    {
+//        build.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .passwordEncoder(passwordEncoder)
+//                .usersByUsernameQuery(USER_QUERY)
+//                .authoritiesByUsernameQuery(USER_ROLE);
+//    }
+
+    /**
+     * JpaAuthentication
+     */
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception
     {
-        build.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder)
-                .usersByUsernameQuery(USER_QUERY)
-                .authoritiesByUsernameQuery(USER_ROLE);
+        build.userDetailsService(userDetailsJpaServcie)
+                .passwordEncoder(passwordEncoder);
+
     }
 }
