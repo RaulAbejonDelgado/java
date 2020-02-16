@@ -10,7 +10,8 @@
         <div class="card-body">
             <h4 class="card-title">
                 <a th:href="@{'../../show/'}+ ${saleorder.partner.id}" class="btn btn-light btn-xs">Volver</a>
-                <a class="btn btn-danger btn-xs float-right" th:href="@{'/saleorder/show/' + ${saleorder.id}(format=pdf)}">PDF</a>
+                <a class="btn btn-danger btn-xs float-right mx-5" th:href="@{'/saleorder/show/' + ${saleorder.id}(format=pdf)}">PDF</a>
+                <a class="btn btn-success btn-xs float-right" th:href="@{'/saleorder/show/' + ${saleorder.id}(format=xlsx)}">XLS</a>
             </h4>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-primary" th:text="#{text.saleorder.partner.title}"></li>
@@ -18,7 +19,7 @@
                 <li class="list-group-item" th:text="${saleorder.partner.email}"></li>
             </ul>
             <ul class="list-group">
-                <li class="list-group-item list-group-item-success" th:text="'Datos del pedido'"></li>
+                <li class="list-group-item list-group-item-success" th:text="#{text.saleorder.title}"></li>
                 <li class="list-group-item " th:text="'Pedido: '+ ${saleorder.id}"></li>
                 <li class="list-group-item " th:text="'Descripcion: '+ ${saleorder.description}"></li>
                 <li class="list-group-item " th:if="${#strings.isEmpty(saleorder.obserbation)}"
