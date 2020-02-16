@@ -43,13 +43,13 @@ INSERT INTO products (name, price, create_at) VALUES('Mouse',7.00,NOW());
 INSERT INTO products (name, price, create_at) VALUES('Monitor',65.00,NOW());
 
 /*SaleOrders*/
-INSERT INTO sale_order(description, obserbation,partner_id, create_at) VALUES('Office material','',1, NOW());
+INSERT INTO sales_order(description, obserbation,partner_id, create_at) VALUES('Office material','',1, NOW());
 INSERT INTO sale_order_line(quantiy, product_id, sale_order_id) VALUES(3,1,1);
 INSERT INTO sale_order_line(quantiy, product_id, sale_order_id) VALUES(3,2,1);
 INSERT INTO sale_order_line(quantiy, product_id, sale_order_id) VALUES(1,3,1);
-
 INSERT INTO sales_order(description, obserbation,partner_id, create_at) VALUES('Monitor',null,1, NOW());
-INSERT INTO sales_order_line(quantiy, product_id, sale_order_id) VALUES(2,3,2);
+
+INSERT INTO sale_order_line(quantiy, product_id, sale_order_id) VALUES(2,3,2);
 
 
 --/*Users*/
