@@ -10,12 +10,12 @@
             <h1
                     class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
                     th:text="${Title}">
-
             </h1>
         </div>
         <div class="card-body">
             <h4 class="card-title">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/partner-form}" class="btn btn-success btn-xs">Create Partner</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/partner-form}" class="btn btn-success btn-xs">Create Partnerr</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-xs float-right" th:href="@{'/index' (format=csv)}">CSV</a>
             </h4>
             <table class="table table-striped">
                 <thead class="text-light bg-dark">

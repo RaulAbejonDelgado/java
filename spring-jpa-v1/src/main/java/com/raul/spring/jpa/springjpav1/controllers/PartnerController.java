@@ -93,8 +93,8 @@ public class PartnerController {
         return "show-partner";
     }
 
-    @RequestMapping(value = {"/list", "/",""}, method = RequestMethod.GET)
-    public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Locale locale) {
+    @RequestMapping(value = {"/list", "/","","/index"}, method = RequestMethod.GET)
+    public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Locale locale) {
         Pageable pageRequest = PageRequest.of(page, 6);
 
         Page<Partner> partners = partnerRepoService.findAll(pageRequest);
@@ -104,8 +104,6 @@ public class PartnerController {
         model.addAttribute("Title", messageSource.getMessage("text.controller.partner.title", null,locale));
         model.addAttribute("partners", partners);
         model.addAttribute("page", pageRender);
-
-
 
         return "index";
     }
