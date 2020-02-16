@@ -20,10 +20,10 @@
                 <thead class="text-light bg-dark">
                 <tr>
                     <td sec:authorize="hasRole('ROLE_ADMIN')">Id</td>
-                    <td>Nombre</td>
-                    <td>Apellido</td>
-                    <td>Email</td>
-                    <td>Fecha</td>
+                    <td th:text="#{text.partner.name}">Nombre</td>
+                    <td th:text="#{text.partner.surname}">Apellido</td>
+                    <td th:text="#{text.partner.email}">Email</td>
+                    <td th:text="#{text.partner.createAt}">Fecha</td>
                     <td sec:authorize="isAuthenticated()">Crear factura</td>
                     <td>Editar</td>
                     <td>Eliminar</td>
