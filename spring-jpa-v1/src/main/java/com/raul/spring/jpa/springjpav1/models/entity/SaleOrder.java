@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,6 +76,8 @@ public class SaleOrder implements Serializable {
         this.createAt = createAt;
     }
 
+    //When the object is serializable this method will be skip
+    @XmlTransient
     public Partner getPartner() {
         return partner;
     }
