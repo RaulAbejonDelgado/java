@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
+<div id="deletePartner" th:text="#{text.partner.delete}" style="display: none;"></div>
 <header th:replace="layout/layout :: header"></header>
 <div class="container py-4">
     <div class="card" bg-light>
@@ -44,7 +45,7 @@
                            th:text="editar"></a>
                     </td>
                     <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-xs" th:href="@{/delete/} + ${partner.id}" th:text="Eliminar"
-                           onclick="return confirm('¿ Esta seguro de eliminar el registro ?')"></a></td>
+                           onclick="return confirm(document.getElementById('deletePartner').textContent)"></a></td>
                 </tr>
                 </tbody>
             </table>
