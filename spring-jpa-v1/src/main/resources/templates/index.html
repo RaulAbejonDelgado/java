@@ -5,10 +5,10 @@
 <header th:replace="layout/layout :: header"></header>
 <div class="container py-4">
     <div class="card" bg-light>
-        <div class="header" th:text="${title}">
+        <div class="header" th:text="${Title}">
             <h1
                     class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
-                    th:text="${titulo}">
+                    th:text="${Title}">
 
             </h1>
         </div>
@@ -19,14 +19,14 @@
             <table class="table table-striped">
                 <thead class="text-light bg-dark">
                 <tr>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')">Id</td>
+                    <td sec:authorize="isAuthenticated()">Id</td>
                     <td th:text="#{text.partner.name}">Nombre</td>
                     <td th:text="#{text.partner.surname}">Apellido</td>
                     <td th:text="#{text.partner.email}">Email</td>
                     <td th:text="#{text.partner.createAt}">Fecha</td>
                     <td sec:authorize="isAuthenticated()">Crear factura</td>
-                    <td>Editar</td>
-                    <td>Eliminar</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">Editar</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</td>
                 </tr>
                 </thead>
                 <tbody>

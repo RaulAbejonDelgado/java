@@ -7,6 +7,7 @@ import com.raul.spring.jpa.springjpav1.util.paginator.PageRender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -46,6 +48,12 @@ public class PartnerController {
 
     @Autowired
     private IUploadService uploadService;
+
+    /**
+     * I18N
+     */
+    @Autowired
+    private MessageSource messageSource;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -86,14 +94,14 @@ public class PartnerController {
     }
 
     @RequestMapping(value = {"/list", "/",""}, method = RequestMethod.GET)
-    public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+    public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Locale locale) {
         Pageable pageRequest = PageRequest.of(page, 6);
 
         Page<Partner> partners = partnerRepoService.findAll(pageRequest);
 
         PageRender<Partner> pageRender = new PageRender<>("/list", partners);
 
-        model.addAttribute("Title", "List of partners");
+        model.addAttribute("Title", messageSource.getMessage("text.controller.partner.title", null,locale));
         model.addAttribute("partners", partners);
         model.addAttribute("page", pageRender);
 
