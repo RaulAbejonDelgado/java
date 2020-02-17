@@ -17,6 +17,7 @@
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/partner-form}" class="btn btn-success btn-xs">Create Partnerr</a>
                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-xs float-right" th:href="@{'/index' (format=csv)}">CSV</a>
                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-outline-success btn-xs float-right" th:href="@{'/index' (format=xml)}">XML</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-outline-warning btn-xs float-right" th:href="@{'/index' (format=json)}">JSON</a>
             </h4>
             <table class="table table-striped">
                 <thead class="text-light bg-dark">
