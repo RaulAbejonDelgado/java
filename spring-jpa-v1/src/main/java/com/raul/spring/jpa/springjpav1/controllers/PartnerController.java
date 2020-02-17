@@ -95,14 +95,6 @@ public class PartnerController {
         return "show-partner";
     }
 
-    /**
-     *
-     * @return Parter list to convert too xml
-     */
-    @GetMapping(value = {"/api/list-partner"})
-    public @ResponseBody PartnerList listRest() {
-        return new PartnerList(partnerRepoService.findAll());
-    }
 
     @RequestMapping(value = {"/list", "/","","/index"}, method = RequestMethod.GET)
     public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Locale locale) {
